@@ -7,12 +7,15 @@ psi4.set_memory('2 GB')
 psi4.core.set_output_file('water_uvvis.dat', False)
 
 # 1. Define geometry
+# mol = psi4.geometry("""
+# 0 1
+# O   0.00000000   0.00000000   0.11726900
+# H   0.00000000   0.75696800  -0.46907600
+# H   0.00000000  -0.75696800  -0.46907600
+# symmetry c1
+# """)
 mol = psi4.geometry("""
-0 1
-O   0.00000000   0.00000000   0.11726900
-H   0.00000000   0.75696800  -0.46907600
-H   0.00000000  -0.75696800  -0.46907600
-symmetry c1
+    pubchem:benzene
 """)
 
 # 2. Configure calculation options
@@ -66,8 +69,8 @@ plt.figure(figsize=(8, 5))
 plt.plot(wavelengths, spectrum, color='navy', lw=2, label='TD-B3LYP / def2-SVP')
 plt.xlabel('Wavelength (nm)')
 plt.ylabel('Absorbance (arb. units)')
-plt.title('Calculated UV-Vis Spectrum of Water ($H_2O$)')
-plt.gca().invert_xaxis()
+plt.title('Calculated UV-Vis Spectrum')
+plt.gca()
 plt.grid(True, linestyle='--', alpha=0.6)
 plt.legend()
 plt.tight_layout()
